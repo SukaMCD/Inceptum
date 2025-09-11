@@ -30,7 +30,6 @@ class SocialiteController extends Controller
                 'google_id' => $googleUser->id,
                 'google_token' => $googleUser->token ?? null,
                 'google_refresh_token' => $googleUser->refreshToken ?? null,
-                'role' => 'customer'
             ]);
         } else {
             // Buat user baru khusus Google
@@ -47,6 +46,11 @@ class SocialiteController extends Controller
 
         // Login user dan redirect
         Auth::login($user);
+
+        // Login admin
+        if ($user->role === 'admin') {
+            return redirect('/admin/dashboard'); // homepage admin
+        }
         return redirect('/'); // homepage user
     }
 }
