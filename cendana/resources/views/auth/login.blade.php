@@ -10,7 +10,6 @@
     {{-- Login manual --}}
     <form method="POST" action="{{ route('login') }}">
         @csrf
-
         <div>
             <label for="email">Email</label><br>
             <input id="email" type="email" name="email" required autofocus>
@@ -32,7 +31,7 @@
 
     {{-- Login dengan Google --}}
     <div>
-        <a href="{{ url('auth/google') }}">Login dengan Google</a>
+        <a href="{{ url('auth/redirect') }}">Login dengan Google</a>
     </div>
 
 </body>

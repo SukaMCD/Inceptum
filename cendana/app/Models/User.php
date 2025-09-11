@@ -13,14 +13,25 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     /**
+     * Nama primary key untuk model.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id_user';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'nama_user',
         'email',
         'password',
+        'google_id',
+        'google_token',
+        'google_refresh_token',
+        'role'
     ];
 
     /**
