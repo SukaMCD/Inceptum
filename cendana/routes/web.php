@@ -1,39 +1,28 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\Auth\SocialiteController;
 use Illuminate\Http\Request;
 
+// Homepage
 Route::get('/', function () {
-    return view('homepage');
+    return view('homepage'); // resources/views/homepage.blade.php
 })->name('homepage');
 
+// Halaman login manual
 Route::get('auth/login', function () {
-    return view('auth.login');
+    return view('auth.login'); // resources/views/auth/login.blade.php
 })->name('login');
 
-// Rute untuk mengarahkan ke halaman login Google
+// Login pakai Google
 Route::get('auth/redirect', [SocialiteController::class, 'redirect'])->name('socialite.redirect');
-
-// Rute callback dari Google
 Route::get('auth/google/callback', [SocialiteController::class, 'callback'])->name('socialite.callback');
 
-// Rute untuk logout
+// Logout
 Route::post('logout', function (Request $request) {
     Auth::logout();
     $request->session()->invalidate();
     $request->session()->regenerateToken();
     return redirect('/');
 })->name('logout');
-
-// Rute admin dashboard
-Route::middleware(['auth'])->group(function () {
-    Route::prefix('admin')->name('admin.')->group(function () {
-        Route::get('dashboard', function () {
-            return view('admin.dashboard');
-        })->name('dashboard');
-    });
-});

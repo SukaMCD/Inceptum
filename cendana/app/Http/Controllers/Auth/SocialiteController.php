@@ -49,8 +49,8 @@ class SocialiteController extends Controller
 
         // Login admin
         if ($user->role === 'admin') {
-            return redirect('/admin/dashboard'); // homepage admin
+            return redirect()->to('/admin'); // panel Filament
         }
-        return redirect('/'); // homepage user
+        return redirect()->route('homepage');
     }
 }
