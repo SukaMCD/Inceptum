@@ -25,6 +25,7 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
+            ->brandName('Kedai Cendana')
             ->id('admin')
             ->path('admin')
             ->login(null)
