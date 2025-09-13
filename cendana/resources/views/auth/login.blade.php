@@ -51,23 +51,24 @@
                     <!-- Atau -->
 
                     <!-- Form -->
-                    <form action="#">
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
                         <div class="input-group mb-3">
-                            <input type="email" class="form-control form-control-lg fs-6" placeholder="Email" required>
+                            <input type="email" class="form-control form-control-lg fs-6" placeholder="Email" name="email" required>
                         </div>
+
                         <div class="input-group mb-3">
-                            <input type="password" class="form-control form-control-lg fs-6" placeholder="Password" required>
+                            <input type="password" class="form-control form-control-lg fs-6" placeholder="Password" name="password" required>
                         </div>
                         <div class="input-group mb-3 d-flex justify-content-between">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="formCheck">
+                                <input type="checkbox" class="form-check-input" id="formCheck" name="remember">
                                 <label for="formCheck" class="form-check-label text-secondary"><small>Ingat Saya</small></label>
                             </div>
-                            <div>
-                                <small><a href="#" class="biru">Lupa Password?</a></small>
-                            </div>
+                            <div> <small><a href="#">Lupa Password?</a></small> </div>
                         </div>
-                        <button class="btn btn-cendana btn-lg w-100 mb-3">Login</button>
+
+                        <button type="submit" class="btn btn-cendana btn-lg w-100 mb-3">Login</button>
                     </form>
                     <!-- Form -->
                     <div class="text-center">
