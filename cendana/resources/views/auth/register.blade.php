@@ -53,20 +53,41 @@
                     <!-- Form -->
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
+
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control form-control-lg fs-6" placeholder="Nama Pengguna" name="nama_user" required>
+                            <input type="text" class="form-control form-control-lg fs-6 @error('nama_user') is-invalid @enderror" placeholder="Nama Pengguna" name="nama_user" value="{{ old('nama_user') }}" required>
+                            @error('nama_user')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
 
                         <div class="input-group mb-3">
-                            <input type="email" class="form-control form-control-lg fs-6" placeholder="Email" name="email" required>
+                            <input type="email" class="form-control form-control-lg fs-6 @error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email') }}" required>
+                            @error('email')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
 
                         <div class="input-group mb-3">
-                            <input type="password" class="form-control form-control-lg fs-6" placeholder="Password" name="password" required>
+                            <input type="password" class="form-control form-control-lg fs-6 @error('password') is-invalid @enderror" placeholder="Password" name="password" required>
+                            @error('password')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
 
                         <div class="input-group mb-3">
-                            <input type="password" class="form-control form-control-lg fs-6" placeholder="Konfirmasi Password" name="password_confirmation" required>
+                            <input type="password" class="form-control form-control-lg fs-6 @error('password_confirmation') is-invalid @enderror" placeholder="Konfirmasi Password" name="password_confirmation" required>
+                            @error('password_confirmation')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
 
                         <button type="submit" class="btn btn-cendana btn-lg w-100 mb-3">Register</button>

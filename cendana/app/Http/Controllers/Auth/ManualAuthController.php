@@ -10,13 +10,22 @@ use Illuminate\Support\Facades\Hash;
 
 class ManualAuthController extends Controller
 {
-    // Tampilkan form login
+    /**
+     * Tampilkan form login.
+     *
+     * @return \Illuminate\View\View
+     */
     public function showLogin()
     {
         return view('auth.login');
     }
 
-    // Proses login
+    /**
+     * Proses otentikasi pengguna secara manual.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -36,20 +45,33 @@ class ManualAuthController extends Controller
             return redirect()->route('homepage');
         }
 
-        return back()->withErrors([
+        // Jika otentikasi gagal, kembalikan ke form login
+        // dengan input sebelumnya dan pesan error.
+        return back()->withInput()->withErrors([
             'email' => 'Email atau password salah.',
         ]);
     }
 
-    // Tampilkan form register
+    /**
+     * Tampilkan form registrasi.
+     *
+     * @return \Illuminate\View\View
+     */
     public function showRegister()
     {
         return view('auth.register');
     }
 
-    // Proses register
+    /**
+     * Proses registrasi pengguna baru.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function register(Request $request)
     {
+        // Metode validate() akan otomatis mengalihkan kembali dengan error
+        // jika validasi gagal, jadi tidak perlu tambahan withInput() atau withErrors().
         $request->validate([
             'nama_user' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',

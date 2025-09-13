@@ -53,21 +53,33 @@
                     <!-- Form -->
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
+
                         <div class="input-group mb-3">
-                            <input type="email" class="form-control form-control-lg fs-6" placeholder="Email" name="email" required>
+                            <input type="email" class="form-control form-control-lg fs-6 @error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email') }}" required>
+                            @error('email')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
 
                         <div class="input-group mb-3">
-                            <input type="password" class="form-control form-control-lg fs-6" placeholder="Password" name="password" required>
+                            <input type="password" class="form-control form-control-lg fs-6 @error('password') is-invalid @enderror" placeholder="Password" name="password" required>
+                            @error('password')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                         <div class="input-group mb-3 d-flex justify-content-between">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="formCheck" name="remember">
                                 <label for="formCheck" class="form-check-label text-secondary"><small>Ingat Saya</small></label>
                             </div>
-                            <div> <small><a href="#">Lupa Password?</a></small> </div>
+                            <div>
+                                <small><a href="{{ route('password.request') }}">Lupa Password?</a></small>
+                            </div>
                         </div>
-
                         <button type="submit" class="btn btn-cendana btn-lg w-100 mb-3">Login</button>
                     </form>
                     <!-- Form -->

@@ -27,6 +27,20 @@ Route::prefix('auth')->group(function () {
     Route::get('google/callback', [SocialiteController::class, 'callback'])->name('socialite.callback');
 });
 
+Route::prefix('password')->group(function () {
+    // Tampilkan form permintaan reset password
+    Route::get('request', [App\Http\Controllers\Auth\PasswordResetLinkController::class, 'create'])->name('password.request');
+    
+    // Proses pengiriman email reset password
+    Route::post('email', [App\Http\Controllers\Auth\PasswordResetLinkController::class, 'store'])->name('password.email');
+    
+    // Tampilkan form untuk mereset password baru
+    Route::get('reset/{token}', [App\Http\Controllers\Auth\NewPasswordController::class, 'create'])->name('password.reset');
+    
+    // Proses reset password baru
+    Route::post('reset', [App\Http\Controllers\Auth\NewPasswordController::class, 'store'])->name('password.store');
+});
+
 // Logout
 Route::post('/logout', function (Request $request) {
     Auth::logout();

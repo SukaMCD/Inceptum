@@ -4,6 +4,9 @@
     <title>Kedai Cendana</title>
 </head>
 <body>
+    @include('layout.header')
+
+    {{-- Konten Utama Halaman --}}
     <h1>Selamat Datang di Kedai Cendana</h1>
     <p>Makan makanan favoritmu dengan mudah.</p>
 
