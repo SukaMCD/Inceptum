@@ -15,6 +15,11 @@ Route::get('auth/login', function () {
     return view('auth.login'); // resources/views/auth/login.blade.php
 })->name('login');
 
+// Halaman register manual
+Route::get('auth/register', function () {
+    return view('auth.register'); // resources/views/auth/register.blade.php
+})->name('register');
+
 // Login pakai Google
 Route::get('auth/redirect', [SocialiteController::class, 'redirect'])->name('socialite.redirect');
 Route::get('auth/google/callback', [SocialiteController::class, 'callback'])->name('socialite.callback');
