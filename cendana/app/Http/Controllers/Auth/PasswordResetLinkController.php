@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
+use App\Models\User;
 
 class PasswordResetLinkController extends Controller
 {
@@ -27,7 +28,15 @@ class PasswordResetLinkController extends Controller
     {
         $request->validate(['email' => ['required', 'email']]);
 
-        // We will send a password reset link to this user. Once we have successfully sent a password reset link to the user, we will redirect the user back to the e-mail link request form with a success message.
+        $user = User::where('email', $request->email)->first();
+
+        // Cek apakah user ada dan apakah auth_provider-nya bukan 'manual'
+        if ($user && $user->auth_provider !== 'manual') {
+            // Jika akun adalah Google, tolak permintaan reset password
+            return back()->withErrors(['email' => 'Akun ini terdaftar melalui Google. Silakan masuk menggunakan Google.']);
+        }
+        
+        // Hanya kirim reset link jika akun adalah 'manual'
         $status = Password::sendResetLink($request->only('email'));
 
         return back()->with('status', __($status));

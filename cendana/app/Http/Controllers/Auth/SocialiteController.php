@@ -19,17 +19,20 @@ class SocialiteController extends Controller
     // Callback dari Google
     public function callback()
     {
-        $googleUser = Socialite::driver('google')->user(); // bisa pakai ->stateless() jika perlu
+        $googleUser = Socialite::driver('google')->user();
 
         // Cek apakah user sudah ada berdasarkan email
         $user = User::where('email', $googleUser->email)->first();
 
         if ($user) {
-            // User manual sudah ada, update google_id
+            // Jika user sudah ada (manual atau Google), update data Google-nya
             $user->update([
                 'google_id' => $googleUser->id,
                 'google_token' => $googleUser->token ?? null,
                 'google_refresh_token' => $googleUser->refreshToken ?? null,
+                // Pastikan akun yang sudah ada (mungkin akun manual)
+                // ditandai sebagai akun Google setelah ini
+                'auth_provider' => 'google', 
             ]);
         } else {
             // Buat user baru khusus Google
@@ -39,8 +42,11 @@ class SocialiteController extends Controller
                 'google_id' => $googleUser->id,
                 'google_token' => $googleUser->token ?? null,
                 'google_refresh_token' => $googleUser->refreshToken ?? null,
-                'password' => Hash::make('user'),
+                // Password di set NULL karena login hanya via Google
+                'password' => null, 
                 'role' => 'customer',
+                // Tandai ini sebagai akun Google
+                'auth_provider' => 'google',
             ]);
         }
 
@@ -49,7 +55,7 @@ class SocialiteController extends Controller
 
         // Login admin
         if ($user->role === 'admin') {
-            return redirect()->to('/admin'); // panel Filament
+            return redirect()->to('/admin');
         }
         return redirect()->route('homepage');
     }

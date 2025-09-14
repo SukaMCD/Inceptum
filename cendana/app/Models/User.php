@@ -22,6 +22,8 @@ class User extends Authenticatable implements FilamentUser, HasName
         'google_token',
         'google_refresh_token',
         'role',
+        // Tambahkan kolom auth_provider di sini
+        'auth_provider',
     ];
 
     protected $hidden = [
