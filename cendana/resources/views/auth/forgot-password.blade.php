@@ -14,7 +14,9 @@
     <div class="row vh-100 g-0">
         <!-- Gambar -->
         <div class="col-lg-6 position-relative d-none d-lg-block">
-            <div class="bg-holder"></div>
+            <img src="{{ asset('images/image2.webp') }}"
+                alt="Login Background"
+                class="w-100 h-100 object-cover position-absolute top-0 start-0" />
         </div>
         <!-- Gambar -->
 

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 
-.bg-holder {
+/* .bg-holder {
     position: absolute;
     width: 100%;
     min-height: 100%;
@@ -8,9 +8,9 @@
     left: 0;
     background-size: cover;
     background-position: center;
-    background-image: url("../images/login_image.jpeg");
+    background-image: url("../images/login_image.webp");
     background-repeat: no-repeat;
-}
+} */
 
 body {
     font-family: 'Nunito Sans', sans-serif;
